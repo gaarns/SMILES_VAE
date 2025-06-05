@@ -194,7 +194,7 @@ def main():
 
         #Saves when loss is lower than best validation loss till now and all models after 100 epochs
        	if epoch_loss_recon_val < best_epoch_loss_val or epoch > 100:
-			torch.save(checkpoint, args.save_loc+'/'+str(epoch)+'checkpoint.pth')
+            torch.save(checkpoint, args.save_loc+'/'+str(epoch)+'checkpoint.pth')
         #update best epoch loss
         best_epoch_loss_val = min(epoch_loss_val, best_epoch_loss_val)
     #evaluate(model, X_train, vocab, inv_dict)
