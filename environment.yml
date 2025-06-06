@@ -1,0 +1,16 @@
+name: smiles_vae
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pandas
+  - numpy
+  - matplotlib
+  - scikit-learn
+  - regex
+  - pillow
+  # For CUDA-enabled GPU (e.g. CUDA 11.7):
+  - pytorch
+  - cudatoolkit=11.7
