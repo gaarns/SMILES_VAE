@@ -43,6 +43,7 @@ def get_arguments():
     return parser.parse_args()
 
 def main():
+    latent_dim = 292
     args = get_arguments()
 
     device = 'cuda:'+str(args.gpu) if torch.cuda.is_available() else 'cpu'
