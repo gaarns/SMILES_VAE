@@ -79,6 +79,7 @@ def main():
 
     ##To oversample datasets if dataset is imbalanced change to True
     oversample = False
+    
     if oversample:
         print(data.shape,labels.shape)
         data,labels = oversample(data,labels)
@@ -189,11 +190,14 @@ def main():
 
         checkpoint = {'model': model.state_dict(),
                     'dict':vocab,
-                    'inv_dict':inv_dict,
-                    }
-
+                    'inv_dict':inv_dict}
+        
         #Saves when loss is lower than best validation loss till now and all models after 100 epochs
+<<<<<<< HEAD
+        if epoch_loss_val < best_epoch_loss_val or epoch > 100:
+=======
         if epoch_loss_recon_val < best_epoch_loss_val or epoch > 100:
+>>>>>>> master
             torch.save(checkpoint, args.save_loc+'/'+str(epoch)+'checkpoint.pth')
         #update best epoch loss
         best_epoch_loss_val = min(epoch_loss_val, best_epoch_loss_val)
