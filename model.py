@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+import random
 
 
 class Conv_Encoder(nn.Module):
@@ -99,9 +100,8 @@ class Molecule_VAE(nn.Module):
 			top1 = output.argmax(2)
 
 			#Teacher Forcing 
-			if random.random()<self.teacher_forcing_ratio:
+			if random.random() < self.teacher_forcing_ratio:
 			    input = x[:,t,:].argmax(1)
-			
 			else:
 				input = top1.squeeze(1).detach()  #If this detach is left out the computational graph is retained.
 		return outputs
@@ -133,7 +133,7 @@ def latent_loss(z_mean, z_stddev):
 def init_weights(m):
 	"""Initialize weights based on type of layer"""
 	if type(m) == nn.Conv1d:
-		init.normal_(m.weight.data)
+		torch.nn.init.normal_(m.weight.data)
 		m.bias.data.fill_(0.01)
 	if type(m) == nn.Linear:
 		n = m.in_features
@@ -143,9 +143,9 @@ def init_weights(m):
 	if type(m) == nn.GRU:
 		for param in m.parameters():
 			if len(param.shape) >= 2:
-				init.orthogonal_(param.data)
+				torch.nn.init.orthogonal_(param.data)
 			else:
-				init.normal_(param.data)       
+				torch.nn.init.normal_(param.data)       
 
 ##############################################################################################
 #######Only Fully Connected Layers in Encoder Decoder (Baseline)##############################
