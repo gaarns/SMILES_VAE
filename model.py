@@ -109,7 +109,7 @@ class Molecule_VAE(nn.Module):
 	def forward(self, x):
 		"""Forward Function which passes the data through entire model"""
 		self.h_enc = self.encoder(x)
-		z = self._sample_latent(h_enc)
+		z = self._sample_latent(self.h_enc)
 	
 		recon_x = self.forward_decoder(z,x)
 		return recon_x
